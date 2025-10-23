@@ -1,5 +1,4 @@
 <?php
-namespace App;
 include_once "AppoimentUtility.php";
 
 ?>

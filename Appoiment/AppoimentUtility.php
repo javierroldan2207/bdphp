@@ -1,11 +1,8 @@
 <?php
 
-namespace App;
-use PDO;
-
-include_once ("../BD/Database.php");
 
 class AppoimentUtility{
+    include_once ("../BD/Database.php");
     public static function getAppoiments(){
     $instance = Database::getInstance();
 

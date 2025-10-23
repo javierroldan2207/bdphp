@@ -1,26 +1,16 @@
 <?php
-namespace App;
-use PDO;
 
 
+class DB{
+        private static ?PDO $instance = null;
+        /** Conexión con nuestra base de datos */
+        public static function getInstance(){
 
-class Database {
-    private static ?PDO $instance = null;
-    
-    public static function getInstance(){
-          $host="php2526-db-1";
-  $db="citas";
-  $user="root";
-  $password="root";
-  $port=3306;
-
-        if (!self::$instance){
-            $dsn = "mysql:host=$host;port=$port;dbname=$db;charset=utf8mb4";
-
-            // Conectar a la base de datos
-            self::$instance = new PDO($dsn, $user, $password);
+            if (!self::$instance) {
+                $config = require __DIR__ . '/../../config.php';
+                $db = $config['db'];
+                self::$instance = new PDO("mysql:host={$db['host']};dbname={$db['dbname']}", $db['user'], $db['pass']);
+            }
+            return self::$instance;
         }
-
-        return self::$instance;
-    }
 }
