@@ -1,12 +1,12 @@
 <?php
 
 return [
-    ['db']={
-        "host" =>"php2526-db-1", //Nombre de mi contenedor *Cambiar.
-        "db" =>"citas",
+    "db" => [
+        "host" =>"php-documents-db-1", //Nombre de mi contenedor *Cambiar.
+        "dbname" =>"citas",
         "user" =>"root",
-        "password" => "root",
+        "pass" => "root",
         "port" => 3306
-     }
+        ]
     ];
 

@@ -18,19 +18,22 @@ include_once "AppoimentUtility.php";
   <tbody>
 
     <?php
-        $appoiments = AppoimentUtility::getAppoiments();
-        foreach ($appoiments as $appoiment){
-            echo "<tr>";
-            echo "<th scope=\"row\">" . $appoiment["id"] . "</th>";
-            echo "<td>" . $appoiment["usuario_id"]. "</td>";
-            echo "<td>" . $appoiment["tipo_cita_id"]. "</td>";
-            echo "<td>" . $appoiment["fecha"]. "</td>";
-            echo "<td>" . $appoiment["hora"]. "</td>";
-            echo "</tr>";
-
+        try {
+          $appoiments = AppoimentUtility::getAppoiments();
+          foreach ($appoiments as $appoiment){
+              echo "<tr>";
+              echo "<th scope=\"row\">" . $appoiment["id"] . "</th>";
+              echo "<td>" . $appoiment["usuario_id"]. "</td>";
+              echo "<td>" . $appoiment["tipo_cita_id"]. "</td>";
+              echo "<td>" . $appoiment["fecha"]. "</td>";
+              echo "<td>" . $appoiment["hora"]. "</td>";
+              echo "</tr>";
+          }
+        }catch (Exception $e) {
+              echo  $e->getMessage() ;
         }
     ?>
-    
+        
   </tbody>
 </table>
 
