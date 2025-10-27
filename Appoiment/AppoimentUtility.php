@@ -1,21 +1,31 @@
 <?php
 
-require_once (__DIR__ . "/../BD/DataBase.php");
+require_once __DIR__ . '/../BD/DataBase.php';
+
 
 class AppoimentUtility{
-    
-    public static function getAppoiments(){
-        try{
-            $instance = DataBase::getInstance();
+    public static function getAllAppoiment(){
+        $instance = DB::getInstance();
+        $query = "SELECT c.id, u.nombre_usuario AS userName, t.nombre AS type, c.fecha, c.hora FROM citas c JOIN usuarios u ON c.usuario_id = u.id JOIN tipos_cita t ON c.tipo_cita_id = t.id ORDER BY c.id";
+        $stmt = $instance->query($query);
 
-            $query = "SELECT citas.id as \"id\", nombre_usuario as \"usuario_id\",nombre as \"tipo_cita_id\", fecha, hora FROM `citas` , usuarios, tipos_cita where citas.usuario_id = usuarios.id and citas.tipo_cita_id =tipos_cita.id";
-            $stmt = $instance->query($query);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }catch(Exception $e){
-            throw new Exception("Error de conexión con la base de datos."); 
-        }
-        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
-}
 
-// Función que devuelve un array asociativo con todas las citas
+    public static function getUsuarios() {
+        $instance = DB::getInstance();
+        $query = "SELECT nombre_usuario AS userName FROM usuarios";
+        $stmt = $instance->query($query);
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function getTiposCita(){
+        $instance = DB::getInstance();
+        $query = "SELECT id, nombre FROM tipos_cita ORDER BY id";
+        $stmt = $instance->query($query); 
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+}
